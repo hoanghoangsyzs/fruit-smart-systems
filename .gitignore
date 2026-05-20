@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# ML
+ml/artifacts/*.pt
+!ml/artifacts/.gitkeep
+
+# Data
+dataset/**/train/**/*
+dataset/**/val/**/*
+dataset/**/test/**/*
+!dataset/**/.gitkeep
+!dataset/DATASET.md
+!dataset/metadata.csv
+
+# Backend
+backend/data/*.db
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Node
+frontend/node_modules/
+frontend/dist/
+
+# Env
+.env
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+Thumbs.db
+.DS_Store

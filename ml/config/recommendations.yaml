@@ -1,0 +1,29 @@
+disease.healthy:
+  - priority: low
+    title: Cây khỏe mạnh
+    detail: Tiếp tục theo dõi định kỳ 7 ngày/lần. Duy trì tưới và bón phân theo lịch.
+
+disease.leaf_spot:
+  - priority: high
+    title: Xử lý đốm lá
+    detail: Tỉa lá bệnh, cải thiện thoáng tán. Cân nhắc phun thuốc sinh học theo hướng dẫn địa phương.
+
+disease.anthracnose:
+  - priority: high
+    title: Kiểm soát thán thư
+    detail: Thu gom và tiêu hủy phần bệnh. Hạn chế tưới lá; phun phòng khi trời ráo sáng sớm.
+
+ripeness.unripe:
+  - priority: medium
+    title: Trái chưa chín
+    detail: Chưa thu hoạch. Theo dõi thêm 7–14 ngày tùy thời tiết.
+
+ripeness.half_ripe:
+  - priority: medium
+    title: Trái gần chín
+    detail: Lên lịch thu hoạch trong 5–7 ngày. Tránh va đập khi vận chuyển.
+
+ripeness.ripe:
+  - priority: low
+    title: Trái đã chín
+    detail: Thu hoạch sớm để tránh rụng và hư hỏng. Bảo quản nơi thoáng mát.

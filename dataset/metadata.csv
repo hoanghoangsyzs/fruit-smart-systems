@@ -1,0 +1,3 @@
+path,task,label,source,orchard_location,captured_at,notes
+disease/train/healthy/sample_001.jpg,disease,healthy,self,Dong Nai,2026-05-01,mau metadata
+ripeness/train/unripe/sample_001.jpg,ripeness,unripe,self,Dong Nai,2026-05-01,mau metadata
