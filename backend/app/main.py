@@ -40,8 +40,8 @@ app.include_router(analyze.router)
 app.include_router(predictions.router)
 app.include_router(dashboard.router)
 
-if settings.upload_path.exists():
-    app.mount("/uploads", StaticFiles(directory=str(settings.upload_path)), name="uploads")
+settings.upload_path.mkdir(parents=True, exist_ok=True)
+app.mount("/uploads", StaticFiles(directory=str(settings.upload_path)), name="uploads")
 
 
 @app.get("/health")

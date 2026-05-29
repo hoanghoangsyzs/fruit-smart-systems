@@ -42,7 +42,7 @@ export const api = {
       body: JSON.stringify({ email, password, full_name }),
     }),
   orchards: () => request<Orchard[]>("/api/v1/orchards"),
-  createOrchard: (body: { name: string; location?: string }) =>
+  createOrchard: (body: { name: string; crop_type?: string; location?: string; area_ha?: number }) =>
     request<Orchard>("/api/v1/orchards", { method: "POST", body: JSON.stringify(body) }),
   analyze: (file: File, orchard_id?: number) => {
     const fd = new FormData();
@@ -60,7 +60,21 @@ export const api = {
 export interface Orchard {
   id: number;
   name: string;
+  crop_type: string;
   location: string | null;
+  area_ha: number | null;
+}
+
+export interface HotspotRegion {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  severity: string;
+  color: string;
+  label: string;
+  label_vi: string;
+  confidence: number;
 }
 
 export interface AnalyzeResult {
@@ -69,6 +83,8 @@ export interface AnalyzeResult {
   ripeness: { label: string; label_vi: string; confidence: number };
   quality_score: number;
   quality_grade: string;
+  severity: string;
+  hotspots: HotspotRegion[];
   recommendations: { priority: string; title: string; detail: string }[];
   image_url: string;
 }

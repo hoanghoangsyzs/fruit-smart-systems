@@ -1,6 +1,6 @@
-# Hệ thống thông minh nhận diện trái/cây mít (Mức Nâng cao)
+# Hệ thống thông minh nhận diện trái sầu riêng (Mức Nâng cao)
 
-Dự án SDC: AI + Xử lý ảnh + Nông nghiệp thông minh — nhận diện sâu bệnh, độ chín, đánh giá chất lượng và giám sát vườn mít.
+Dự án SDC: AI + Xử lý ảnh + Nông nghiệp thông minh — nhận diện sâu bệnh, độ chín, đánh giá chất lượng và giám sát vườn sầu riêng.
 
 ## Phương án đã chốt
 

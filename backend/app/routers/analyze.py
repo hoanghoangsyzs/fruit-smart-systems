@@ -10,7 +10,7 @@ from app.auth import get_current_user
 from app.config import settings
 from app.database import get_db
 from app.models import Orchard, Prediction, User
-from app.schemas import AnalyzeResponse, LabelResult, Recommendation
+from app.schemas import AnalyzeResponse, HotspotRegion, LabelResult, Recommendation
 from app.services.inference import LABEL_VI, analyze_image
 
 router = APIRouter(prefix="/api/v1", tags=["analyze"])
@@ -66,6 +66,7 @@ async def analyze(
     db.refresh(pred)
 
     recommendations = [Recommendation(**r) for r in result["recommendations"]]
+    hotspots = [HotspotRegion(**h) for h in result.get("hotspots", [])]
 
     return AnalyzeResponse(
         prediction_id=pred.id,
@@ -81,6 +82,8 @@ async def analyze(
         ),
         quality_score=result["quality_score"],
         quality_grade=result["quality_grade"],
+        severity=result.get("severity", "none"),
+        hotspots=hotspots,
         recommendations=recommendations,
         image_url=f"/uploads/{filename}",
         created_at=pred.created_at or datetime.utcnow(),

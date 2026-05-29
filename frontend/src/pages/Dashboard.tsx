@@ -11,6 +11,7 @@ import {
   YAxis,
 } from "recharts";
 import { DashboardSummary, Orchard, api } from "../api";
+import { cropLabel } from "../constants/crops";
 
 export default function DashboardPage() {
   const [data, setData] = useState<DashboardSummary | null>(null);
@@ -45,7 +46,7 @@ export default function DashboardPage() {
           <option value="">Tất cả</option>
           {orchards.map((o) => (
             <option key={o.id} value={o.id}>
-              {o.name}
+              {o.name} ({cropLabel(o.crop_type)})
             </option>
           ))}
         </select>
@@ -87,7 +88,7 @@ export default function DashboardPage() {
       )}
 
       {data && data.total_scans === 0 && (
-        <p>Chưa có dữ liệu. Hãy phân tích vài ảnh tại trang Upload hoặc Scan.</p>
+        <p>Chưa có dữ liệu. Hãy phân tích vài ảnh tại trang Phân tích AI hoặc Chụp tại vườn.</p>
       )}
     </>
   );

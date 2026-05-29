@@ -23,39 +23,47 @@ LABEL_VI = {
 }
 
 
-def _mock_result() -> dict:
-    return {
-        "disease": {"label": "healthy", "confidence": 0.91},
+def _attach_visual_analysis(result: dict, image_path: Path | None) -> dict:
+    from app.services.hotspots import generate_hotspots, overall_severity
+
+    disease = result["disease"]["label"]
+    conf = result["disease"]["confidence"]
+    result["hotspots"] = generate_hotspots(disease, image_path)
+    result["severity"] = overall_severity(disease, conf)
+    return result
+
+
+def _mock_result(image_path: Path | None = None) -> dict:
+    base = {
+        "disease": {"label": "leaf_spot", "confidence": 0.87},
         "ripeness": {"label": "half_ripe", "confidence": 0.84},
-        "quality_score": 75,
+        "quality_score": 72,
         "quality_grade": "B",
-        "recommendations": [
-            {
-                "priority": "medium",
-                "title": "Theo dõi độ chín",
-                "detail": "Trái gần chín. Lên kế hoạch thu hoạch trong 5–7 ngày.",
-            }
-        ],
+        "recommendations": [],
     }
+    base["recommendations"] = _load_recommendations(
+        base["disease"]["label"], base["ripeness"]["label"]
+    )
+    return _attach_visual_analysis(base, image_path)
 
 
 def _load_recommendations(disease: str, ripeness: str) -> list[dict]:
     rules_path = ML_ROOT / "config" / "recommendations.yaml"
     if not rules_path.exists():
-        return _mock_result()["recommendations"]
+        return []
     try:
         import yaml
 
         with open(rules_path, encoding="utf-8") as f:
             rules = yaml.safe_load(f) or {}
     except Exception:
-        return _mock_result()["recommendations"]
+        return []
 
     out: list[dict] = []
     for key in (f"disease.{disease}", f"ripeness.{ripeness}"):
         if key in rules:
             out.extend(rules[key])
-    return out or _mock_result()["recommendations"]
+    return out
 
 
 def _compute_quality(disease: str, ripeness: str, d_conf: float, r_conf: float) -> tuple[int, str]:
@@ -77,14 +85,14 @@ def _compute_quality(disease: str, ripeness: str, d_conf: float, r_conf: float) 
 
 def analyze_image(image_path: Path) -> dict:
     if settings.mock_inference:
-        return _mock_result()
+        return _mock_result(image_path)
 
     try:
         from ml.inference import predict_dual
 
         raw = predict_dual(image_path, artifacts_dir=settings.artifacts_path)
     except Exception:
-        return _mock_result()
+        return _mock_result(image_path)
 
     disease = raw["disease"]["label"]
     ripeness = raw["ripeness"]["label"]
@@ -93,13 +101,16 @@ def analyze_image(image_path: Path) -> dict:
     quality_score, quality_grade = _compute_quality(disease, ripeness, d_conf, r_conf)
     recommendations = _load_recommendations(disease, ripeness)
 
-    return {
-        "disease": {"label": disease, "confidence": d_conf},
-        "ripeness": {"label": ripeness, "confidence": r_conf},
-        "quality_score": quality_score,
-        "quality_grade": quality_grade,
-        "recommendations": recommendations,
-    }
+    return _attach_visual_analysis(
+        {
+            "disease": {"label": disease, "confidence": d_conf},
+            "ripeness": {"label": ripeness, "confidence": r_conf},
+            "quality_score": quality_score,
+            "quality_grade": quality_grade,
+            "recommendations": recommendations,
+        },
+        image_path,
+    )
 
 
 def models_loaded() -> dict[str, bool]:

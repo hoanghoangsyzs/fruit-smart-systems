@@ -1,32 +1,15 @@
-import { NavLink, Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
+import AppShell from "./components/AppShell";
 import { getToken } from "./api";
+import AnalyzePage from "./pages/Analyze";
 import DashboardPage from "./pages/Dashboard";
 import LoginPage from "./pages/Login";
+import OrchardsPage from "./pages/Orchards";
 import ScanPage from "./pages/Scan";
-import UploadPage from "./pages/Upload";
 
-function PrivateLayout({ children }: { children: React.ReactNode }) {
+function PrivateRoute({ children }: { children: React.ReactNode }) {
   if (!getToken()) return <Navigate to="/login" replace />;
-  return (
-    <div className="layout">
-      <header>
-        <h1>Mit Smart System</h1>
-        <p style={{ margin: 0, opacity: 0.8 }}>Hệ thống thông minh nhận diện trái mít — SDC</p>
-        <nav>
-          <NavLink to="/upload" className={({ isActive }) => (isActive ? "active" : "")}>
-            Phân tích ảnh
-          </NavLink>
-          <NavLink to="/scan" className={({ isActive }) => (isActive ? "active" : "")}>
-            Chụp tại vườn (PWA)
-          </NavLink>
-          <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "active" : "")}>
-            Dashboard
-          </NavLink>
-        </nav>
-      </header>
-      {children}
-    </div>
-  );
+  return <AppShell>{children}</AppShell>;
 }
 
 export default function App() {
@@ -34,30 +17,42 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route
-        path="/upload"
+        path="/analyze"
         element={
-          <PrivateLayout>
-            <UploadPage />
-          </PrivateLayout>
+          <PrivateRoute>
+            <AnalyzePage />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/upload"
+        element={<Navigate to="/analyze" replace />}
+      />
+      <Route
+        path="/orchards"
+        element={
+          <PrivateRoute>
+            <OrchardsPage />
+          </PrivateRoute>
         }
       />
       <Route
         path="/scan"
         element={
-          <PrivateLayout>
+          <PrivateRoute>
             <ScanPage />
-          </PrivateLayout>
+          </PrivateRoute>
         }
       />
       <Route
         path="/dashboard"
         element={
-          <PrivateLayout>
+          <PrivateRoute>
             <DashboardPage />
-          </PrivateLayout>
+          </PrivateRoute>
         }
       />
-      <Route path="*" element={<Navigate to="/upload" replace />} />
+      <Route path="*" element={<Navigate to="/analyze" replace />} />
     </Routes>
   );
 }

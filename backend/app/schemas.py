@@ -21,6 +21,7 @@ class Token(BaseModel):
 
 class OrchardCreate(BaseModel):
     name: str
+    crop_type: str = "jackfruit"
     location: str | None = None
     area_ha: float | None = None
 
@@ -28,6 +29,7 @@ class OrchardCreate(BaseModel):
 class OrchardOut(BaseModel):
     id: int
     name: str
+    crop_type: str
     location: str | None
     area_ha: float | None
     created_at: datetime
@@ -47,12 +49,26 @@ class Recommendation(BaseModel):
     detail: str
 
 
+class HotspotRegion(BaseModel):
+    x: float
+    y: float
+    width: float
+    height: float
+    severity: str
+    color: str
+    label: str
+    label_vi: str
+    confidence: float
+
+
 class AnalyzeResponse(BaseModel):
     prediction_id: int
     disease: LabelResult
     ripeness: LabelResult
     quality_score: int
     quality_grade: str
+    severity: str
+    hotspots: list[HotspotRegion]
     recommendations: list[Recommendation]
     image_url: str
     created_at: datetime

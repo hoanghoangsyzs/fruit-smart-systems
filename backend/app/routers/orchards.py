@@ -20,7 +20,13 @@ def create_orchard(
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    orchard = Orchard(user_id=user.id, name=body.name, location=body.location, area_ha=body.area_ha)
+    orchard = Orchard(
+        user_id=user.id,
+        name=body.name,
+        crop_type=body.crop_type,
+        location=body.location,
+        area_ha=body.area_ha,
+    )
     db.add(orchard)
     db.commit()
     db.refresh(orchard)

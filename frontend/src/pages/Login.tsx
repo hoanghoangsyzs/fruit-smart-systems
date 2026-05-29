@@ -21,7 +21,7 @@ export default function LoginPage() {
       }
       const { access_token } = await api.login(email, password);
       setToken(access_token);
-      nav("/upload");
+      nav("/analyze");
     } catch (err) {
       setError(err instanceof Error ? err.message : "Lỗi đăng nhập");
     } finally {
