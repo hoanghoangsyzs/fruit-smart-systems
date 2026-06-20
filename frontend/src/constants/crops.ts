@@ -1,7 +1,7 @@
 export const CROP_TYPES = [
-  { value: "jackfruit", label: "Mít" },
-  { value: "mango", label: "Xoài" },
   { value: "durian", label: "Sầu riêng" },
+  { value: "mango", label: "Xoài" },
+  { value: "jackfruit", label: "Mít" },
   { value: "banana", label: "Chuối" },
   { value: "citrus", label: "Cam / quýt" },
   { value: "dragonfruit", label: "Thanh long" },

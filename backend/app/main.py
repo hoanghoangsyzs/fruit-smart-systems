@@ -7,7 +7,7 @@ from fastapi.staticfiles import StaticFiles
 
 from app.config import settings
 from app.database import init_db
-from app.routers import analyze, auth, dashboard, orchards, predictions
+from app.routers import analyze, auth, chat, dashboard, orchards, predictions
 from app.services.inference import models_loaded
 
 
@@ -20,8 +20,8 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Mit Smart System API",
-    description="Hệ thống thông minh nhận diện trái/cây mít — SDC",
+    title="Durian Smart System API",
+    description="Hệ thống thông minh nhận diện trái/cây sầu riêng - SDC",
     version="1.0.0",
     lifespan=lifespan,
 )
@@ -39,6 +39,7 @@ app.include_router(orchards.router)
 app.include_router(analyze.router)
 app.include_router(predictions.router)
 app.include_router(dashboard.router)
+app.include_router(chat.router)
 
 settings.upload_path.mkdir(parents=True, exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=str(settings.upload_path)), name="uploads")

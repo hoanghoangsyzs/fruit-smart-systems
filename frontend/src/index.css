@@ -562,3 +562,141 @@ button:disabled {
 .layout nav {
   display: none;
 }
+
+/* Chat assistant */
+.chat-widget {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 40;
+}
+
+.chat-toggle {
+  min-width: 4.5rem;
+  box-shadow: 0 8px 24px rgba(27, 94, 32, 0.22);
+}
+
+.chat-panel {
+  width: min(380px, calc(100vw - 2rem));
+  height: min(560px, calc(100vh - 6rem));
+  background: var(--surface);
+  border: 1px solid rgba(197, 225, 165, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 18px 48px rgba(27, 94, 32, 0.22);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.chat-head {
+  background: linear-gradient(90deg, #1b5e20, #2e7d32);
+  color: #fff;
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.chat-head strong,
+.chat-head small {
+  display: block;
+}
+
+.chat-head small {
+  opacity: 0.85;
+  font-size: 0.78rem;
+}
+
+.chat-icon-btn {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  line-height: 1;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  background: #f9fdf7;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.chat-message {
+  max-width: 86%;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.chat-message.assistant {
+  align-self: flex-start;
+  background: #fff;
+  border: 1px solid #dcedc8;
+  color: #263826;
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  background: #2e7d32;
+  color: #fff;
+}
+
+.chat-suggestions {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  overflow-x: auto;
+  border-top: 1px solid #e8f5e9;
+}
+
+.chat-suggestions button {
+  flex: 0 0 auto;
+  max-width: 220px;
+  background: #e8f5e9;
+  color: var(--primary);
+  border: 1px solid #c5e1a5;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid #e8f5e9;
+  background: #fff;
+}
+
+.chat-form input {
+  min-width: 0;
+}
+
+.chat-form button {
+  padding-inline: 0.9rem;
+}
+
+@media (max-width: 520px) {
+  .chat-widget {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+
+  .chat-panel {
+    width: calc(100vw - 1.5rem);
+    height: min(540px, calc(100vh - 5rem));
+  }
+}

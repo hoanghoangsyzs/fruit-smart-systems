@@ -5,7 +5,7 @@ import { CROP_TYPES, cropLabel } from "../constants/crops";
 export default function OrchardsPage() {
   const [orchards, setOrchards] = useState<Orchard[]>([]);
   const [name, setName] = useState("");
-  const [cropType, setCropType] = useState("jackfruit");
+  const [cropType, setCropType] = useState("durian");
   const [location, setLocation] = useState("");
   const [areaHa, setAreaHa] = useState("");
   const [error, setError] = useState("");
@@ -48,11 +48,11 @@ export default function OrchardsPage() {
     <div className="page-grid">
       <section className="card form-card">
         <h2>Thêm vườn / lô trồng</h2>
-        <p className="muted">Gắn loại cây trồng để theo dõi và phân tích chính xác hơn (theo mô hình Phytelix).</p>
+        <p className="muted">Gắn loại cây trồng để theo dõi và phân tích chính xác hơn.</p>
         <form onSubmit={submit} className="form-grid">
           <div className="field">
             <label>Tên vườn *</label>
-            <input value={name} onChange={(e) => setName(e.target.value)} required placeholder="VD: Vườn mít Bến Tre A" />
+            <input value={name} onChange={(e) => setName(e.target.value)} required placeholder="VD: Vườn sầu riêng Bến Tre A" />
           </div>
           <div className="field">
             <label>Loại cây trồng *</label>
@@ -111,8 +111,8 @@ export default function OrchardsPage() {
                     <td>
                       <span className="crop-badge">{cropLabel(o.crop_type)}</span>
                     </td>
-                    <td>{o.location ?? "—"}</td>
-                    <td>{o.area_ha != null ? `${o.area_ha} ha` : "—"}</td>
+                    <td>{o.location ?? "-"}</td>
+                    <td>{o.area_ha != null ? `${o.area_ha} ha` : "-"}</td>
                   </tr>
                 ))}
               </tbody>

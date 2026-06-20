@@ -1,8 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { clearToken } from "../api";
+import ChatWidget from "./ChatWidget";
 
 const NAV = [
-  { to: "/analyze", label: "Phân tích AI"  },
+  { to: "/analyze", label: "Phân tích AI" },
   { to: "/orchards", label: "Quản lý vườn" },
   { to: "/dashboard", label: "Dashboard" },
   { to: "/scan", label: "Chụp tại vườn", icon: "" },
@@ -15,9 +16,9 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand">
-          <span className="brand-icon">🍈</span>
+          <span className="brand-icon">AI</span>
           <div>
-            <strong>Mit Smart</strong>
+            <strong>Durian Smart</strong>
             <small>Giám sát &amp; AI nhận diện</small>
           </div>
         </div>
@@ -33,17 +34,25 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             </NavLink>
           ))}
         </nav>
-        <button type="button" className="btn-ghost" onClick={() => { clearToken(); nav("/login"); }}>
+        <button
+          type="button"
+          className="btn-ghost"
+          onClick={() => {
+            clearToken();
+            nav("/login");
+          }}
+        >
           Đăng xuất
         </button>
       </aside>
       <div className="main-area">
         <header className="topbar">
-          <h1>Hệ thống thông minh nhận diện trái cây</h1>
+          <h1>Hệ thống thông minh nhận diện sầu riêng</h1>
           <p>Phát hiện sâu bệnh · Đánh giá độ chín · Khuyến nghị xử lý</p>
         </header>
         <main className="page-content">{children}</main>
       </div>
+      <ChatWidget />
     </div>
   );
 }

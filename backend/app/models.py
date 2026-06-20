@@ -25,7 +25,7 @@ class Orchard(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
     name: Mapped[str] = mapped_column(String(255))
-    crop_type: Mapped[str] = mapped_column(String(64), default="jackfruit")
+    crop_type: Mapped[str] = mapped_column(String(64), default="durian")
     location: Mapped[str | None] = mapped_column(String(255), nullable=True)
     area_ha: Mapped[float | None] = mapped_column(Float, nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)

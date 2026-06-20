@@ -55,6 +55,11 @@ export const api = {
     return request<DashboardSummary>(`/api/v1/dashboard/summary${q}`);
   },
   predictions: () => request<PredictionRow[]>("/api/v1/predictions?limit=20"),
+  chat: (message: string, history: ChatMessage[]) =>
+    request<ChatResponse>("/api/v1/chat", {
+      method: "POST",
+      body: JSON.stringify({ message, history }),
+    }),
 };
 
 export interface Orchard {
@@ -103,4 +108,14 @@ export interface PredictionRow {
   quality_score: number;
   quality_grade: string;
   created_at: string;
+}
+
+export interface ChatMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+export interface ChatResponse {
+  reply: string;
+  suggestions: string[];
 }

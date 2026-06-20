@@ -43,5 +43,5 @@ def init_db():
     _sqlite_add_column_if_missing(
         "orchards",
         "crop_type",
-        "ALTER TABLE orchards ADD COLUMN crop_type VARCHAR(64) DEFAULT 'jackfruit'",
+        "ALTER TABLE orchards ADD COLUMN crop_type VARCHAR(64) DEFAULT 'durian'",
     )

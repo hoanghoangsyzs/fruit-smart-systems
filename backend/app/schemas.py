@@ -21,7 +21,7 @@ class Token(BaseModel):
 
 class OrchardCreate(BaseModel):
     name: str
-    crop_type: str = "jackfruit"
+    crop_type: str = "durian"
     location: str | None = None
     area_ha: float | None = None
 
@@ -103,3 +103,18 @@ class DashboardSummary(BaseModel):
     disease_distribution: list[DistributionItem]
     ripeness_distribution: list[DistributionItem]
     timeline: list[TimelineItem]
+
+
+class ChatMessage(BaseModel):
+    role: str
+    content: str
+
+
+class ChatRequest(BaseModel):
+    message: str = Field(min_length=1, max_length=1000)
+    history: list[ChatMessage] = Field(default_factory=list, max_length=12)
+
+
+class ChatResponse(BaseModel):
+    reply: str
+    suggestions: list[str] = Field(default_factory=list)
