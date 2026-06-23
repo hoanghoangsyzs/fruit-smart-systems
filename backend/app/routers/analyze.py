@@ -70,6 +70,11 @@ async def analyze(
 
     return AnalyzeResponse(
         prediction_id=pred.id,
+        fruit=LabelResult(
+            label=result["fruit"]["label"],
+            label_vi=LABEL_VI.get(result["fruit"]["label"], result["fruit"]["label"]),
+            confidence=result["fruit"]["confidence"],
+        ),
         disease=LabelResult(
             label=result["disease"]["label"],
             label_vi=LABEL_VI.get(result["disease"]["label"], result["disease"]["label"]),

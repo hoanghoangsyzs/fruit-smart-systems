@@ -13,6 +13,10 @@ class Settings(BaseSettings):
     upload_dir: str = "./uploads"
     gemini_api_key: str = ""
     gemini_model: str = "gemini-2.5-flash"
+    roboflow_api_key: str = ""
+    roboflow_model_id: str = ""
+    roboflow_model_version: str = "1"
+    roboflow_confidence: float = 0.35
     cors_origins: str = (
         "http://localhost:5173,http://127.0.0.1:5173,"
         "http://localhost:5174,http://127.0.0.1:5174"

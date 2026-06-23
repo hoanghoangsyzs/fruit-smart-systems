@@ -464,10 +464,23 @@ button:disabled {
   border-radius: 10px;
 }
 
+.metric-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.metric-row strong {
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
 .metric-label {
   font-size: 0.8rem;
   color: var(--muted);
   text-transform: uppercase;
+  flex: 0 0 auto;
 }
 
 .progress-bar {

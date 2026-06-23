@@ -84,6 +84,7 @@ export interface HotspotRegion {
 
 export interface AnalyzeResult {
   prediction_id: number;
+  fruit: { label: string; label_vi: string; confidence: number };
   disease: { label: string; label_vi: string; confidence: number };
   ripeness: { label: string; label_vi: string; confidence: number };
   quality_score: number;

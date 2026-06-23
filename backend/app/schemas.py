@@ -63,6 +63,7 @@ class HotspotRegion(BaseModel):
 
 class AnalyzeResponse(BaseModel):
     prediction_id: int
+    fruit: LabelResult
     disease: LabelResult
     ripeness: LabelResult
     quality_score: int
